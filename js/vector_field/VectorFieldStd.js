@@ -24,7 +24,7 @@ const COLORMAP = [                  // 色彩刻度
 ];
 const particleCount = Math.round(bounds.width * PARTICLE_MULTIPLIER);
 const particles = Array.from({ length: particleCount }, () => randomizeParticle({}));
-const vectorField = createVectorField('div');
+const vectorField = createVectorField();
 const vectorColorRange = calculateColorLim(vectorField);
 const vectorColorScale = calculateColorScale(255, vectorColorRange, COLORMAP);
 frame(particles, vectorField, vectorColorScale, ctx);
@@ -41,36 +41,21 @@ function initializeCanvas(canvas, dpr) {
     return ctx;
 }
 
-function createVectorField(type = 'default') {
-    if (type === 'div') {
-        return {
-            interpolate: (x, y) => {
-                x = (x - bounds.width / 2) / (bounds.height / 3);
-                y = (y - bounds.height / 2) / (bounds.height / 3);
-                const ux = y * (1 - 2 * x * x) * Math.exp(-(x * x + y * y));
-                const vy = x * (1 - 2 * y * y) * Math.exp(-(x * x + y * y));
-                const s = Math.sqrt(ux * ux + vy * vy);
-                const u = 1.5 * ux / s;
-                const v = 1.5 * vy / s;
-                const norm = Math.sqrt(u * u + v * v);
-                const colorParam = ((x ** 3 * y + x * y ** 3 - 3 * x * y) * Math.exp(-(x * x + y * y)));
-                return [u, v, norm, colorParam];
-            }
-        };
-    }
-    else if (type === 'curl') {
-        return {
-            interpolate: (x, y) => {
-                x = (x-bounds.width/2) / (bounds.height/3);
-                y = (y-bounds.height/2) / (bounds.height/3);
-                const u = 6*x*y/(x * x + y * y);
-                const v = 6*y*y/(x * x + y * y) - 2;
-                const norm = Math.sqrt(u * u + v * v);
-                const colorParam = 6*x/Math.sqrt(x * x + y * y);
-                return [u, v, norm, colorParam];
-            }
-        };
-    }
+function createVectorField() {
+    return {
+        interpolate: (x, y) => {
+            x = (x - bounds.width / 2) / (bounds.height / 3);
+            y = (y - bounds.height / 2) / (bounds.height / 3);
+            const ux = y * (1 - 2 * x * x) * Math.exp(-(x * x + y * y));
+            const vy = x * (1 - 2 * y * y) * Math.exp(-(x * x + y * y));
+            const s = Math.sqrt(ux * ux + vy * vy);
+            const u = 1.5 * ux / s;
+            const v = 1.5 * vy / s;
+            const norm = Math.sqrt(u * u + v * v);
+            const colorParam = ((x ** 3 * y + x * y ** 3 - 3 * x * y) * Math.exp(-(x * x + y * y)));
+            return [u, v, norm, colorParam];
+        }
+    };
 }
 
 function calculateColorLim(vectorField, sampleCount = 1000) {

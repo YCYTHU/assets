@@ -74,7 +74,7 @@ function createVectorField(type = 'default') {
                 const u = 6*x*y/(x * x + y * y);
                 const v = 6*y*y/(x * x + y * y) - 2;
                 const norm = Math.sqrt(u * u + v * v);
-                const colorParam = 6*x/Math.sqrt(x * x + y * y);
+                const colorParam = -6*x/Math.sqrt(x * x + y * y);
                 return [u, v, norm, colorParam];
             }
         };
