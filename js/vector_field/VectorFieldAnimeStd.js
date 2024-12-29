@@ -10,7 +10,7 @@ const bounds = {
 const MAX_PARTICLE_AGE = 100;       // 粒子寿命
 const PARTICLE_MULTIPLIER = 10.0;   // 粒子密度
 const FRAME_RATE = 25;              // 刷新间隔（ms）
-const LINE_WIDTH = 1 * dpr;         // 线宽
+const LINE_WIDTH = 1.0;             // 线宽
 const EVOLVE_STEP = 0.5;            // 步长
 const COLORMAP = [                  // 色彩刻度
     [58, 76, 192],
