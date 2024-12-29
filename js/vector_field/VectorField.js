@@ -39,10 +39,9 @@ frame(particles2, vectorField2, vectorColorScale2, ctx2);
 function initializeCanvas(canvas, dpr) {
     const ctx = canvas.getContext("2d");
     canvas.style.backgroundColor = "#000";
-    canvas.width = 640 * dpr;
-    canvas.height = 360 * dpr;
-    canvas.style.width = `640px`;
-    canvas.style.height = `360px`;
+    canvas.width = canvas.style.width * dpr;
+    canvas.style.height = `${0.5625*canvas.style.width}px`
+    canvas.height = canvas.style.height * dpr;
     ctx.translate(0, canvas.height);
     ctx.scale(dpr, -dpr);
     return ctx;
