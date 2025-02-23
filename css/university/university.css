@@ -1,0 +1,251 @@
+html {
+	--main-color: #7c2e9a;
+	--my-font-size: 12px;
+}
+.background {
+	background-color: var(--main-color);
+	padding-left: calc(1.5*var(--my-font-size));
+	padding-right: calc(1.5*var(--my-font-size));
+	overflow: hidden;
+	display: flex;
+	align-items: end;
+	border-radius: calc(1.5*var(--my-font-size));
+	margin-top: calc(1*var(--my-font-size));
+	line-height: 1.0;
+}
+.background p {
+	margin: 0;
+	font-family: FZYT;
+	color: var(--main-color);
+	text-align: center;
+}
+.container {
+	margin: 0 auto calc(5*var(--my-font-size));
+	width: fit-content;
+}
+@media (min-width: 320px) {
+    html {
+        --my-font-size: 12px;
+    }
+}
+@media (min-width: 360px) {
+    html {
+        --my-font-size: 14px;
+    }
+}
+@media (min-width: 480px) {
+    html {
+        --my-font-size: 16px;
+    }
+}
+@media (min-width: 600px) {
+    html {
+        --my-font-size: 18px;
+    }
+    .background {
+    	align-items: center;
+    }
+    .container {
+		margin: 0 auto;
+	}
+}
+@media (min-width: 800px) {
+    html {
+        --my-font-size: 20px;
+    }
+}
+@media (min-width: 1440px) {
+    html {
+        --my-font-size: 24px;
+    }
+}
+.card-box {
+	background-color: #fff;
+	padding: calc(1.2*var(--my-font-size));
+	border-radius: calc(2*var(--my-font-size));
+}
+@font-face {
+	font-family: FZYT;
+	src: url("https://cdn.jsdelivr.net/gh/ycythu/assets@main/fonts/fangzheng/fangzhengyaoti.ttf")
+}
+.card-body {
+	display: flex;
+	flex-direction: column;
+}
+.card_head {
+	padding: 0 calc(1.2*var(--my-font-size));
+}
+.bless {
+	display: flex;
+	justify-content: space-between;
+}
+.blessRight {
+	display: flex;
+	align-items: flex-end;
+	column-gap: calc(0.2*var(--my-font-size));
+}
+.logo {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.name {
+	display: flex;
+	margin-top: calc(0.8*var(--my-font-size));
+	border-top: 2px solid var(--main-color);
+	justify-content: space-between;
+}
+.name p {
+	margin-top: calc(0.4*var(--my-font-size));
+}
+.station {
+	display: flex;
+	justify-content: space-between;
+	margin: calc(2*var(--my-font-size)) 0;
+}
+.station .size4 {
+	text-align-last: center;
+	margin-top: calc(0.4*var(--my-font-size));
+}
+.subwayLogo {
+	display: flex;
+	column-gap: calc(0.5*var(--my-font-size));
+}
+.subwayName {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.train {
+	width: calc(2.5*var(--my-font-size));
+}
+.subwayLogoImgBox {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	mask: url(https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/university/beijing.svg) no-repeat;
+    background: red;
+    width: calc(3.5* var(--my-font-size));
+    height: calc(3.5* var(--my-font-size));
+    mask-size: 100% 100%;
+}
+/*.subwayLogoImg {
+	width: calc(3.5*var(--my-font-size));
+	filter: drop-shadow(var(--main-color) 0px 200px);
+	transform: translateY(-200px);
+}*/
+.univLogoImgBox {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	mask: url(https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/university/Tsinghua.svg) no-repeat;
+    background: red;
+    width: calc(4.5* var(--my-font-size));
+    height: calc(4.5* var(--my-font-size));
+    mask-size: 100% 100%;
+}
+/*.univLogoImg {
+	width: calc(4.5*var(--my-font-size));
+	filter: drop-shadow(var(--main-color) 0px 200px);
+	transform: translateY(-200px);
+}*/
+p.white {
+	color: #fff;
+}
+.justified {
+	text-align-last: justify;
+}
+.stationNames {
+	display: flex;
+	justify-content: space-evenly;
+}
+.subwayLine p {
+	width: calc(4*var(--my-font-size));
+}
+.stations {
+	position: relative;
+	height: 12px;
+	margin-top: calc(0.5*var(--my-font-size));
+}
+.line {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-color: var(--main-color);
+	transform: translateY(-50%);
+}
+.circles {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: calc(0.75*var(--my-font-size));
+	transform: translateY(-50%);
+	display: flex;
+	justify-content: space-evenly;
+}
+.circle {
+	margin: 0 calc(1.5*var(--my-font-size));
+	width: calc(0.75*var(--my-font-size));
+	height: calc(0.75*var(--my-font-size));
+	border-radius: 50%;
+	border: 2px solid var(--main-color);
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	transform: translateY(-1px);
+}
+.arrow {
+	display: flex;
+	justify-content: space-between;
+}
+.arrow .size4 {
+	margin: calc(0.5*var(--my-font-size));
+}
+.dots {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: calc(0.5*var(--my-font-size)) 0;
+	height: 10px;
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10"><circle cx="5" cy="5" r="2.5" fill="%237c2e9a" /></svg>');
+	background-repeat: repeat;
+}
+.smSots {
+	margin: calc(0.2*var(--my-font-size)) 0;
+	height: 6px;
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" width="6"><circle cx="3" cy="3" r="1.5" fill="%23fff" /></svg>');
+	background-repeat: repeat;
+}
+.dotCircle {
+	width: calc(3*var(--my-font-size));
+	height: calc(3*var(--my-font-size));
+	border-radius: 50%;
+	background-color: var(--main-color);
+}
+.dots div:first-child {
+	transform: translateX(calc(-3.2*var(--my-font-size)));
+}
+.dots div:last-child {
+	transform: translateX(calc(3.2*var(--my-font-size)));
+}
+.slogan {
+	margin: calc(0.5*var(--my-font-size));
+}
+.slogan p.size3 {
+    margin: calc(0.4*var(--my-font-size));
+}
+.size1 {
+	font-size: calc(2.25*var(--my-font-size));
+}
+.size2 {
+	font-size: calc(1.8*var(--my-font-size));
+}
+.size3 {
+	font-size: calc(1.1*var(--my-font-size));
+}
+.size4 {
+	font-size: calc(0.8*var(--my-font-size));
+}
