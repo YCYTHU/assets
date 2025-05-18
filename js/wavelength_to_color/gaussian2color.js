@@ -1,52 +1,16 @@
-window.onload = function () {
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  const DPR = window.devicePixelRatio || 1;
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const DPR = window.devicePixelRatio || 1;
 
-  let WIDTH = canvas.clientWidth;
-  let HEIGHT = 500;
+let WIDTH = canvas.clientWidth;
+let HEIGHT = 500;
 
-  const xAxis = [390, 830];
+const xAxis = [390, 830];
 
-  let longPressTimer = null;
-  const LONG_PRESS_DURATION = 800; // ms
-  
-  const XYZ2RGB = s_XYZ2RGB;
+let longPressTimer = null;
+const LONG_PRESS_DURATION = 800; // ms
 
-  setCanvasSize();
-  window.addEventListener('resize', () => {
-    setCanvasSize();
-    draw();
-  });
-  
-  const gaussians = [];
-  let dragging = null;
-  let selected = null;
-  
-  const peakRadius = 6;
-  const widthHandleLength = 6;
-
-  canvas.addEventListener('mousedown', handleStart);
-  canvas.addEventListener('mousemove', handleMove);
-  canvas.addEventListener('mouseup', handleEnd);
-  canvas.addEventListener('mouseleave', handleEnd);
-  canvas.addEventListener('touchstart', handleStart, { passive: false });
-  canvas.addEventListener('touchmove', handleMove, { passive: false });
-  canvas.addEventListener('touchend', handleEnd);
-  
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Delete' && selected) {
-      const idx = gaussians.indexOf(selected);
-      if (idx !== -1) {
-        gaussians.splice(idx, 1);
-        selected = null;
-        draw();
-      }
-    }
-  });
-
-  draw();
-}
+const XYZ2RGB = s_XYZ2RGB;
 
 function setCanvasSize() {
   WIDTH = canvas.clientWidth;
@@ -55,11 +19,22 @@ function setCanvasSize() {
   ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
   ctx.scale(DPR, DPR);
 }
+setCanvasSize();
+window.addEventListener('resize', () => {
+  setCanvasSize();
+  draw();
+});
+
+const gaussians = [];
+let dragging = null;
+let selected = null;
+
+const peakRadius = 6;
+const widthHandleLength = 6;
 
 function canvasToAxisX(x) {
   return xAxis[0] + (x / WIDTH) * (xAxis[1] - xAxis[0]);
 }
-
 function axisToCanvasX(x) {
   return WIDTH * (x - xAxis[0]) / (xAxis[1] - xAxis[0]);
 }
@@ -220,6 +195,25 @@ function distance(x1, y1, x2, y2) {
   return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 }
 
+canvas.addEventListener('mousedown', handleStart);
+canvas.addEventListener('mousemove', handleMove);
+canvas.addEventListener('mouseup', handleEnd);
+canvas.addEventListener('mouseleave', handleEnd);
+canvas.addEventListener('touchstart', handleStart, { passive: false });
+canvas.addEventListener('touchmove', handleMove, { passive: false });
+canvas.addEventListener('touchend', handleEnd);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Delete' && selected) {
+    const idx = gaussians.indexOf(selected);
+    if (idx !== -1) {
+      gaussians.splice(idx, 1);
+      selected = null;
+      draw();
+    }
+  }
+});
+
 function exportNormalizedData() {
   const data = [];
   const steps = 4400;
@@ -276,3 +270,6 @@ function normalize(array) {
   });
   return ans;
 }
+
+draw();
+
