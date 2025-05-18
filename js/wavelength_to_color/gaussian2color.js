@@ -239,7 +239,8 @@ function drawTopColor(rgb) {
   ctx.fillRect(0, 0, WIDTH, 30); // 高度 30 像素的颜色条
 }
 
-function gauss2color(data) {
+function gauss2color(normalized) {
+  data = normalized.map(point => point.y);
   var XYZ = [];
   XYZ[0] = math.multiply(0.1, math.dot(data, math.column(xyz, 1)));
   XYZ[1] = math.multiply(0.1, math.dot(data, math.column(xyz, 2)));
