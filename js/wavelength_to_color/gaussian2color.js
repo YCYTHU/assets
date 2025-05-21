@@ -10,7 +10,7 @@ const xAxis = [390, 830];
 let longPressTimer = null;
 const LONG_PRESS_DURATION = 800; // ms
 const XYZ2RGB = s_XYZ2RGB;
-var XYZ = [0,0,0];
+var XYZ = [0,0,1];
 
 function setCanvasSize() {
   WIDTH = canvas.clientWidth;
@@ -105,7 +105,11 @@ function draw() {
   drawAxis();
   exportNormalizedData();
 
-  ctx.fillText(`(${XYZ[0]/(XYZ[0]+XYZ[1]+XYZ[2])}, ${XYZ[1]/(XYZ[0]+XYZ[1]+XYZ[2])})`, axisToCanvasX(740), 40);
+  CIEx = XYZ[0]/(XYZ[0]+XYZ[1]+XYZ[2]);
+  CIEy = XYZ[1]/(XYZ[0]+XYZ[1]+XYZ[2]);
+  ctx.fillStyle = '#333';
+  ctx.font = '16px sans-serif';
+  ctx.fillText(`(${CIEx.toFixed(2)}, ${CIEy.toFixed(2)})`, axisToCanvasX(790), 60);
 }
 
 function totalGaussianY(axisX) {
