@@ -9,8 +9,8 @@ const xAxis = [390, 830];
 
 let longPressTimer = null;
 const LONG_PRESS_DURATION = 800; // ms
-
 const XYZ2RGB = s_XYZ2RGB;
+var XYZ = [0,0,0];
 
 function setCanvasSize() {
   WIDTH = canvas.clientWidth;
@@ -104,6 +104,8 @@ function draw() {
 
   drawAxis();
   exportNormalizedData();
+
+  ctx.fillText(`(${XYZ[0]/(XYZ[0]+XYZ[1]+XYZ[2])}, ${XYZ[1]/(XYZ[0]+XYZ[1]+XYZ[2])})`, axisToCanvasX(740), 40);
 }
 
 function totalGaussianY(axisX) {
@@ -241,7 +243,6 @@ function drawTopColor(rgb) {
 
 function gauss2color(normalized) {
   data = normalized.map(point => point.y);
-  var XYZ = [];
   XYZ[0] = math.multiply(0.1, math.dot(data, math.column(xyz, 1)));
   XYZ[1] = math.multiply(0.1, math.dot(data, math.column(xyz, 2)));
   XYZ[2] = math.multiply(0.1, math.dot(data, math.column(xyz, 3)));
