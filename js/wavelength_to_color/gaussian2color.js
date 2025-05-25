@@ -100,17 +100,14 @@ function draw() {
     ctx.arc(wx, cy, peakRadius, 0, 2 * Math.PI);
     ctx.fillStyle = 'orange';
     ctx.fill();
-
-    ctx.fillStyle = '#333';
-    ctx.fillText(`${g.mu.toFixed(1)} nm`, cx, cy - 20);
-    ctx.fillText(`${(SIGMA2FWHM*g.sigma).toFixed(1)} nm`, (cx+wx)/2, cy - 20);
   }
 
   drawAxis();
   exportNormalizedData();
-  
+
   CIEx = XYZ[0]/(XYZ[0]+XYZ[1]+XYZ[2]);
   CIEy = XYZ[1]/(XYZ[0]+XYZ[1]+XYZ[2]);
+  ctx.fillStyle = '#333';
   ctx.font = '16px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText(`(${CIEx.toFixed(3)}, ${CIEy.toFixed(3)})`, axisToCanvasX(440), 60);
@@ -151,6 +148,7 @@ function handleStart(e) {
               gaussians.splice(idx, 1);
               selected = null;
               draw();
+              showProperty();
             }
           }
         }, LONG_PRESS_DURATION);
@@ -196,9 +194,24 @@ function handleMove(e) {
   draw();
 }
 
+function showProperty() {
+  for (let g of gaussians) {
+    const cx = axisToCanvasX(g.mu);
+    const cy = HEIGHT - g.A;
+    const wx = axisToCanvasX(g.mu + g.sigma * widthHandleLength);
+
+    ctx.fillStyle = '#333';
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${g.mu.toFixed(1)} nm`, cx, cy - 20);
+    ctx.fillText(`${(SIGMA2FWHM*g.sigma).toFixed(1)} nm`, (cx+wx)/2, cy + 20);
+  }
+}
+
 function handleEnd() {
   clearTimeout(longPressTimer);
   dragging = null;
+  showProperty();
 }
 
 function distance(x1, y1, x2, y2) {
@@ -220,6 +233,7 @@ document.addEventListener('keydown', (e) => {
       gaussians.splice(idx, 1);
       selected = null;
       draw();
+      showProperty();
     }
   }
 });
