@@ -100,15 +100,15 @@ function draw() {
     ctx.arc(wx, cy, peakRadius, 0, 2 * Math.PI);
     ctx.fillStyle = 'orange';
     ctx.fill();
+
+    ctx.fillStyle = '#333';
+    ctx.fillText(`${g.mu.toFixed(1)} nm`, cx, cy - 20);
+    ctx.fillText(`${(SIGMA2FWHM*g.sigma).toFixed(1)} nm`, (cx+wx)/2, cy - 20);
   }
 
   drawAxis();
   exportNormalizedData();
-
-  ctx.fillStyle = '#333';
-  ctx.fillText(`${g.mu.toFixed(1)} nm`, cx, cy - 20);
-  ctx.fillText(`${(SIGMA2FWHM*g.sigma).toFixed(1)} nm`, (cx+wx)/2, cy - 20);
-
+  
   CIEx = XYZ[0]/(XYZ[0]+XYZ[1]+XYZ[2]);
   CIEy = XYZ[1]/(XYZ[0]+XYZ[1]+XYZ[2]);
   ctx.font = '16px sans-serif';
