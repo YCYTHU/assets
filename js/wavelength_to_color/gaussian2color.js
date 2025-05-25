@@ -6,7 +6,7 @@ let WIDTH = canvas.clientWidth;
 let HEIGHT = 500;
 
 const xAxis = [390, 830];
-
+const SIGMA2FWHM = 2*Math.sqrt(2*Math.LN2);
 let longPressTimer = null;
 const LONG_PRESS_DURATION = 800; // ms
 const XYZ2RGB = s_XYZ2RGB;
@@ -105,11 +105,15 @@ function draw() {
   drawAxis();
   exportNormalizedData();
 
+  ctx.fillStyle = '#333';
+  ctx.fillText(`${g.mu.toFixed(1)} nm`, cx, cy - 20);
+  ctx.fillText(`${(SIGMA2FWHM*g.sigma).toFixed(1)} nm`, (cx+wx)/2, cy - 20);
+
   CIEx = XYZ[0]/(XYZ[0]+XYZ[1]+XYZ[2]);
   CIEy = XYZ[1]/(XYZ[0]+XYZ[1]+XYZ[2]);
-  ctx.fillStyle = '#333';
   ctx.font = '16px sans-serif';
-  ctx.fillText(`(${CIEx.toFixed(2)}, ${CIEy.toFixed(2)})`, axisToCanvasX(790), 60);
+  ctx.textAlign = 'left';
+  ctx.fillText(`(${CIEx.toFixed(3)}, ${CIEy.toFixed(3)})`, axisToCanvasX(440), 60);
 }
 
 function totalGaussianY(axisX) {
